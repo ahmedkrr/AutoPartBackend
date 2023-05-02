@@ -43,4 +43,9 @@ namespace AutoPartEnd.Model
         public string Discription { get; set; }
         public Double Price { get; set; }
     }
+    public class AddItemResponse
+    {
+        public bool success { get; set; }
+        public string  message { get; set; }
+    }
 }

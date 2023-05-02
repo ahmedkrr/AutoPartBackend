@@ -22,7 +22,7 @@ namespace AutoPartEnd.Resources.LookUps
         [HttpGet("GetSubCategory/{id}")]
         public async Task<object> GetSubCategoryReq([FromRoute]int id)
         {
-            var category = _dbContext.Set<SubCategory>().Where(s => s.CategoryId == id)
+            var category =  _dbContext.Set<SubCategory>().Where(s => s.CategoryId == id)
                 .Select(s => new SubCategoriesResponse
                 {
                     SubCategoryId = s.Id,
@@ -33,7 +33,7 @@ namespace AutoPartEnd.Resources.LookUps
                 }) ;
 
 
-            return category;
+            return  category;
 
         }
 

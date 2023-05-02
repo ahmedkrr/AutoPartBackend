@@ -11,7 +11,7 @@ namespace AutoPartEnd.Resources.Account
 {
     [ApiController]
     [Route("api/Account")]
-    [Authorize]
+    //[Authorize]
     public class AddCompany : ControllerBase
     {
 

@@ -11,6 +11,8 @@ namespace AutoPartEnd.Domain
         public string Name { get; private set; }
         public string Discription { get; private set; }
         public double Price { get; private set; }
+        public string ImageData { get; set; }
+
         public DateTime CreatedTime { get; private set; }
         public DateTime? ModifiedAt { get; set; }
         public int? ModifiedBy { get; set; }
@@ -34,7 +36,7 @@ namespace AutoPartEnd.Domain
         public int SubCategoryId { get; private set; }
 
         public Item() { }
-        public Item(string name ,string discription ,double price, int companyProfileId, int userProfileId, int? carModelId, int? carTypeId, int? manufactureYearId, int subCategoryId ,DateTime createdTime)
+        public Item(string name ,string discription ,double price, int companyProfileId, int userProfileId, int? carModelId, int? carTypeId, int? manufactureYearId, int subCategoryId ,DateTime createdTime ,string imageData)
         {
             Name = name;
             Discription = discription;
@@ -46,6 +48,7 @@ namespace AutoPartEnd.Domain
             ManufactureYearId = manufactureYearId;
             SubCategoryId = subCategoryId;
             CreatedTime = createdTime;
+            ImageData = imageData;
         }
 
 

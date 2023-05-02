@@ -25,8 +25,29 @@ namespace AutoPartEnd.Model
         public int CategoryId { get; set; }
         public string ImageData { get; set; }
         public string SubCategoryName { get; set; }
+    }
+    public class AddCategoryResponse
+    {
+        public bool success { get; set; }
+        public string Categoryname { get; set; }
+    }
+    public class AddSubCategoryResponse
+    {
+        public bool success { get; set; }
+        public string message { get; set; }
+    }
+    public class DeleteCategoryResponse
+    {
+        public bool success { get; set; }
+        public int CategoryId { get; set; }
+        public string categoryName { get; set; }
 
-
+    }
+    public class DeleteSubCategoryResponse
+    {
+        public bool success { get; set; }
+        public int CategoryId { get; set; }
+        public string categoryName { get; set; }
 
     }
 }

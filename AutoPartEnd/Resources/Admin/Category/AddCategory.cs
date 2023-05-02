@@ -12,6 +12,7 @@ namespace AutoPartEnd.Resources
 {
     [ApiController]
     [Route("api/Admin")]
+    
     public class AddCategory : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
@@ -46,7 +47,12 @@ namespace AutoPartEnd.Resources
 
 
 
-                return category.Id;
+                return new AddCategoryResponse
+                {
+                    success = true,
+                    Categoryname =category.CategoryName
+
+                };
             }
 
 

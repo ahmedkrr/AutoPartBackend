@@ -14,6 +14,8 @@ namespace AutoPartEnd.Domain
         public string Name { get; private set; }
         public string CompanyPhoneNumber { get; private set; }
         public string Address { get; private set; }
+        public string Avatar { get; private set; }
+        public string BackgroundImage { get; private set; }
         public DateTime CreatDate { get; private set; }
         public bool IsDeactive { get; private set; }
 
@@ -26,6 +28,14 @@ namespace AutoPartEnd.Domain
         public void Active()
         {
             IsDeactive = false;
+        }
+        public void SetAvatar(string avatar)
+        {
+            Avatar = avatar;
+        }
+        public void SetBackgroundImage(string backgroundImage)
+        {
+            BackgroundImage = backgroundImage;
         }
 
         public CompanyProfile(string name, string companyPhoneNumber, string address)

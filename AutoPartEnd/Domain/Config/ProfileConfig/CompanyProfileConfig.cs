@@ -15,7 +15,10 @@ namespace AutoPartEnd.Domain
             b.Property(p => p.Name).HasMaxLength(250).IsRequired(true);
             b.Property(p => p.CompanyPhoneNumber).HasMaxLength(20).IsRequired(true);
             b.Property(p => p.Address).HasMaxLength(250).IsRequired(true);
- 
+            b.Property(p => p.Avatar).HasColumnType("image");
+            b.Property(p => p.BackgroundImage).HasColumnType("image");
+
+
         }
     }
 }
