@@ -2,42 +2,37 @@
 using AutoPartEnd.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace AutoPartEnd.Resources
 {
     [ApiController]
-    [Route("api/item")]
-    // [Authorize]
-    public class GetItem : ControllerBase
+    [Route("api/lookups")]
+    public class GetItemByCar : ControllerBase
     {
-
         private readonly ApplicationDbContext _dbContext;
-        private readonly IConfiguration _config;
-        public GetItem(ApplicationDbContext dbContext, IConfiguration config)
+
+        public GetItemByCar(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _config = config;
-        }
 
-        [HttpGet("{companyid}/GetallItem")]
-        public async Task<object> GetItems([FromRoute] int companyid)
+        }
+        [HttpGet("GetItemByCar/{carId}/{typeId}/{yearId}/{subcategoryId}")]
+        public async Task<object> GetItemByCarResquest([FromRoute] int carId, int typeId, int yearId ,int subcategoryId)
         {
 
-            var Items = await _dbContext.Set<Item>()
+            var items = await _dbContext.Set<Item>()
                 .Include(c => c.CarModel)
                 .Include(c => c.CarType)
                 .Include(c => c.ManufactureYear)
                 .Include(c => c.UserProfile)
-                .Include(c => c.SubCategory)
+                .Include(c => c.SubCategory )
                 .ThenInclude(c => c.Category)
                 .Include(c => c.CompanyProfile)
-                .Where(s => s.CompanyProfileId == companyid)
+                .Where(s => s.CarModelId == carId && s.CarTypeId == typeId && s.ManufactureYearId == yearId && s.SubCategoryId == subcategoryId)
                 .Select(c => new GetItemResponsee
                 {
                     Id = c.Id,
@@ -55,20 +50,16 @@ namespace AutoPartEnd.Resources
                     SubCatName = c.SubCategory.SubCategoryName,
                     ImageData = c.ImageData,
 
-
-
-
                 })
                 .ToListAsync();
 
-
-            if (Items == null || Items.Count == 0)
-            {
+            if (items == null)
                 return NoContent();
-            }
 
 
-            return Ok(Items);
+            return Ok(items);
+
         }
+
     }
 }

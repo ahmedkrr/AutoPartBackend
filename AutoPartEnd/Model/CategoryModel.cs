@@ -23,6 +23,8 @@ namespace AutoPartEnd.Model
     {
         public int SubCategoryId { get; set; }
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+
         public string ImageData { get; set; }
         public string SubCategoryName { get; set; }
     }

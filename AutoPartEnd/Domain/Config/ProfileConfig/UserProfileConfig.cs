@@ -18,7 +18,7 @@ namespace AutoPartEnd.Domain
             b.Property(p => p.Password).HasMaxLength(500).IsRequired(true);
             b.Property(p => p.PhoneNumber).HasMaxLength(20).IsRequired(true);
             b.Property(p => p.Role).HasDefaultValue(UserRole.undefined).IsRequired(true);
-
+            b.HasIndex(p => p.Email).IsUnique();
 
             b.Property(p => p.CompanyProfileId).IsRequired(false);
             b.HasOne(p => p.CompanyProfile).WithMany(p => p.userProfiles).HasForeignKey(p => p.CompanyProfileId);

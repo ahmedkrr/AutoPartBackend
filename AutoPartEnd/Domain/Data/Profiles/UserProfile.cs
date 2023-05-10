@@ -65,7 +65,7 @@ namespace AutoPartEnd.Domain
             IsDeactive = false;
         }
 
-        public void setAsAcompanyOwner(int companyId)
+        public void setAsAcompanyOwner(int companyId )
         {
             IsCompanyOwner = true;
             CompanyProfileId = companyId;

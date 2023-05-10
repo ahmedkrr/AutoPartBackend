@@ -34,10 +34,10 @@ namespace AutoPartEnd.Resources
                 _dbContext.Remove(Items);
                await _dbContext.SaveChangesAsync();
 
-                return "Successfully Deleted the item id number" + Id;
+                return Ok("Deleted Success");
             }
 
-            return "There is no Id Equls this id"+Id;
+            return BadRequest("The Item Not Found To Delete");
 
 
         }

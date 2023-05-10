@@ -11,7 +11,7 @@ namespace AutoPartEnd.Resources.Account
 {
     [ApiController]
     [Route("api/Account")]
-    //[Authorize]
+    [Authorize]
     public class AddCompany : ControllerBase
     {
 
@@ -45,7 +45,7 @@ namespace AutoPartEnd.Resources.Account
 
                 await _dbContext.SaveChangesAsync();
                 y = user.Id;
-                return company.Id;
+                return Ok(company.Id);
 
             }
             catch (Exception e)

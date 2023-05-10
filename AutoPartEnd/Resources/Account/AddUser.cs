@@ -2,6 +2,7 @@
 using AutoPartEnd.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,24 +28,42 @@ namespace AutoPartEnd.Resources.Account
         [HttpPost("register")]
         public async Task<object> Register([FromBody]UserRegestrationRequest request)
         {
-            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Name) || string.IsNullOrEmpty(request.Password) ||string.IsNullOrEmpty(request.PhoneNumber))
+            try
             {
-               throw new Exception("Field is Empty");
+                if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Name) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.PhoneNumber))
+                {
+                    BadRequest("Field is Empty");
+                }
+
+                var result = await _dbContext.Set<UserProfile>()
+                     .Where(s => request.Email.ToLower().Contains(s.Email.ToLower()))
+                     .FirstOrDefaultAsync();
+
+              
+
+                var User = new UserProfile(request.Name, request.Email, request.Password, request.PhoneNumber);
+                _dbContext.Add(User);
+                await _dbContext.SaveChangesAsync();
+
+                return Ok(User.Id);
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlEx && (sqlEx.Number == 2627 || sqlEx.Number == 2601))
+                {
+                    return BadRequest("The email you provided is already in use!");
+                   
+                }
+                else
+                {
+                    // Handle other database-related exceptions here
+                    return StatusCode(500, "Internal server error");
+                }
+
             }
 
-            var result = await _dbContext.Set<UserProfile>()
-                 .Where(s => request.Email.ToLower().Contains(s.Email.ToLower()))
-                 .FirstOrDefaultAsync();
-
-            if (result != null)
-                throw new Exception($"The Email :{request.Email} is alerdy in use, please use another email");
 
 
-            var User = new UserProfile(request.Name, request.Email, request.Password, request.PhoneNumber);
-            _dbContext.Add(User);
-            await _dbContext.SaveChangesAsync();
-
-            return User.Id;
         }
 
     }

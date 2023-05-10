@@ -2,34 +2,30 @@
 using AutoPartEnd.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-namespace AutoPartEnd.Resources
+namespace AutoPartEnd.Resources.LookUps
 {
     [ApiController]
-    [Route("api/item")]
-    // [Authorize]
-    public class GetItem : ControllerBase
+    [Route("api/lookups")]
+    public class GetItemBySubCategory : ControllerBase
     {
 
         private readonly ApplicationDbContext _dbContext;
-        private readonly IConfiguration _config;
-        public GetItem(ApplicationDbContext dbContext, IConfiguration config)
+
+        public GetItemBySubCategory(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _config = config;
-        }
 
-        [HttpGet("{companyid}/GetallItem")]
-        public async Task<object> GetItems([FromRoute] int companyid)
+        }
+        [HttpGet("GetItemBySubCategory/{id}")]
+         public async Task<object> GetItemBySubCategoryResquest([FromRoute]int id)
         {
 
-            var Items = await _dbContext.Set<Item>()
+            var items = await _dbContext.Set<Item>()
                 .Include(c => c.CarModel)
                 .Include(c => c.CarType)
                 .Include(c => c.ManufactureYear)
@@ -37,7 +33,7 @@ namespace AutoPartEnd.Resources
                 .Include(c => c.SubCategory)
                 .ThenInclude(c => c.Category)
                 .Include(c => c.CompanyProfile)
-                .Where(s => s.CompanyProfileId == companyid)
+                .Where(s => s.SubCategoryId == id)
                 .Select(c => new GetItemResponsee
                 {
                     Id = c.Id,
@@ -54,21 +50,18 @@ namespace AutoPartEnd.Resources
                     CatName = c.SubCategory.Category.CategoryName,
                     SubCatName = c.SubCategory.SubCategoryName,
                     ImageData = c.ImageData,
-
-
-
-
                 })
                 .ToListAsync();
 
-
-            if (Items == null || Items.Count == 0)
-            {
+            if (items == null)
                 return NoContent();
-            }
 
 
-            return Ok(Items);
+            return Ok(items) ;
+
         }
+
+
+
     }
 }

@@ -51,7 +51,7 @@ namespace AutoPartEnd.Resources.Admin
 
 
 
-                    return "Sucess";
+                    return Ok("Success");
                 }
 
             }

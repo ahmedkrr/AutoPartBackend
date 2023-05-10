@@ -38,12 +38,14 @@ namespace AutoPartEnd.Model
     public class GetTypeResponse
     {
         public int Id { get; set; }
+        public int CarID { get; set; }
         public string Type { get; set; }
         public List<GetManufactureResponse> Year { get; set; }
     }
     public class GetManufactureResponse
     {
         public int Id { get; set; }
+        public int TypeId { get; set; }
         public string  Years { get; set; }
     }
     

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <None Remove="Domain\Data\Car\CarType.cs~RF6be6001d.TMP" />
+    <None Remove="Resources\Admin\Cars\GetCars\GetListOfCars.cs~RF1a25d94e.TMP" />
   </ItemGroup>
 
   <ItemGroup>

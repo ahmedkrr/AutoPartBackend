@@ -4,14 +4,16 @@ using AutoPartEnd.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AutoPartEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230503124950_update9")]
+    partial class update9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,9 +294,6 @@ namespace AutoPartEnd.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyProfileId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.ToTable("UserProfile");
                 });

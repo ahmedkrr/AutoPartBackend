@@ -30,7 +30,13 @@ namespace AutoPartEnd.Resources.Account
         public async Task<object> CheckLogin([FromBody] UserLogin request)
         {
             var result = await _dbContext.Set<UserProfile>().FirstOrDefaultAsync(u => u.Email.ToLower() == request.Email.ToLower() && u.Password == request.Password);
-            if (result == null) { return "Error in passsword or email"; }
+            if (result == null)
+            { 
+                return Unauthorized(new LoginResponse 
+                {
+                    message = "Email Or Password Wrong"
+                }); 
+            }
               
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -45,10 +51,11 @@ namespace AutoPartEnd.Resources.Account
 
 
             };
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+            var token = new JwtSecurityToken(
+                _config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
                 claims,
-                expires: DateTime.Now.AddMinutes(120),
+                expires: DateTime.Now.AddMinutes(1000),
                 signingCredentials: credentials);
 
             var x = new JwtSecurityTokenHandler().WriteToken(token);
@@ -62,7 +69,7 @@ namespace AutoPartEnd.Resources.Account
             };
 
 
-            return response;
+            return Ok(response);
 
         }
     }
