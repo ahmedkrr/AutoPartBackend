@@ -27,6 +27,7 @@ namespace AutoPartEnd.Domain
         public CompanyProfile CompanyProfile { get; set; }
         public int? CompanyProfileId { get; private set; }
 
+        public ICollection<ResetPassword> ResetPasswords { get; set; }
         public UserProfile(string name, string email, string password, string phoneNumber )
         {
             Name = name;
@@ -74,6 +75,10 @@ namespace AutoPartEnd.Domain
         {
             IsCompanyOwner = false;
             CompanyProfileId = null;
+        }
+        public void ResetPassword(string password)
+        {
+            Password = password;
         }
     }
 

@@ -13,7 +13,8 @@ namespace AutoPartEnd.Model
     {
         public string message { get; set; }
 
-        public Boolean sucess { get; set; }
+        public bool isDeactive { get; set; }
+        public bool sucess { get; set; }
     }
 
 
@@ -85,5 +86,14 @@ namespace AutoPartEnd.Model
         undefined = 0,
         Member = 1,
         Admin = 2
+    }
+    public class EmailModel
+    {
+        public string To { get; set; }
+    }
+    public class ResetPasswordReq
+    {
+        public string Password { get; set; }
+        public string Confirmpassword { get; set; }
     }
 }

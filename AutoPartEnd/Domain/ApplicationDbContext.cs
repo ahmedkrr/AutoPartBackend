@@ -29,6 +29,8 @@ namespace AutoPartEnd.Domain
             modelBuilder.ApplyConfiguration(new ItemConfig());
             modelBuilder.ApplyConfiguration(new CategoryConfig());
             modelBuilder.ApplyConfiguration(new SubCategoryConfig());
+            modelBuilder.ApplyConfiguration(new ResetPasswordConfig());
+
 
 
 

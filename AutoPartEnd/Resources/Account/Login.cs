@@ -37,6 +37,13 @@ namespace AutoPartEnd.Resources.Account
                     message = "Email Or Password Wrong"
                 }); 
             }
+            if(result.IsDeactive) 
+            {
+                return Unauthorized(new LoginResponse
+                {
+                    message = "The Account is susbend"
+                });
+            }
               
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);

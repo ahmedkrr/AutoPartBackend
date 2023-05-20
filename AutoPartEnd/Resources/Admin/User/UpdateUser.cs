@@ -26,9 +26,6 @@ namespace AutoPartEnd.Resources
 
             user.UpdateUserAdmin(Request.Name ,Request.Email ,Request.IsAdmin, Request.IsDeactive);
 
-            var UpdatedItems = _dbContext.Set<Item>()
-               .Find(Id);
-
             await _dbContext.SaveChangesAsync();
             return Ok();
 

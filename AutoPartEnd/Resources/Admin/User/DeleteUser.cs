@@ -1,5 +1,6 @@
 ﻿using AutoPartEnd.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +22,29 @@ namespace AutoPartEnd.Resources
     [HttpDelete("deleteuser/{id}")]
     public async Task<object> DeleteUserRequest([FromRoute] int Id)
         {
-            //here should add function if user have acompany should deleted 
-            var user = await _dbContext.Set<UserProfile>().FindAsync(Id);
+            var user = await _dbContext.Set<UserProfile>()
+                .Include(c => c.CompanyProfile )
+                .FirstOrDefaultAsync(c => c.Id == Id);
 
             if (user != null)
             {
+                var items = await _dbContext.Set<Item>()
+                    .FirstOrDefaultAsync(c => c.UserProfileId == user.Id);
+
+
+                if(items != null)
+                _dbContext.Remove(items);
+                _dbContext.Set<CompanyProfile>().Remove(user.CompanyProfile);
                 _dbContext.Remove(user);
+
+
+
                 await _dbContext.SaveChangesAsync();
 
-                return "Successfully Deleted the user id number" + Id;
+                return Ok("Successfully Deleted the user id number" );
             }
-            return null;
+
+            return BadRequest(); ;
 
         }
 
