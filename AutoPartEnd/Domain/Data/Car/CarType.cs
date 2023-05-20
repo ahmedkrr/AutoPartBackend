@@ -24,5 +24,11 @@ namespace AutoPartEnd.Domain
             ModelId = modelId;
         }
 
+        public void update(string name)
+        {
+            Name = name;
+        }
+
+
     }
 }

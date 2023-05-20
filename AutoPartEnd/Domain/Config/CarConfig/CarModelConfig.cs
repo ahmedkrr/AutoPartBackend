@@ -13,7 +13,7 @@ namespace AutoPartEnd.Domain
         {
             
             b.Property(p => p.Name).HasMaxLength(500).IsRequired(true);
-            b.HasIndex(p => p.Name).IsUnique();
+            //b.HasIndex(p => p.Name).IsUnique();
         }
     }
 }

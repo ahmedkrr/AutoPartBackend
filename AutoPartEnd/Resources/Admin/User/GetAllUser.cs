@@ -28,7 +28,6 @@ namespace AutoPartEnd.Resources
         {
             var user =  _dbContext.Set<UserProfile>()
                 .Include(c => c.CompanyProfile)
-                //.Include(c => c.Role)
                 .Select(s => new GetUserResponseinfo
                 { 
                 Id = s.Id,

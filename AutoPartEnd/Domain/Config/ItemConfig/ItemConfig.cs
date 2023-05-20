@@ -11,7 +11,7 @@ namespace AutoPartEnd.Domain
     {
         public void Configure(EntityTypeBuilder<Item> b)
         {
-            b.Property(p => p.Name).HasMaxLength(50).IsRequired(true);
+            b.Property(p => p.Name).HasMaxLength(150).IsRequired(true);
             b.Property(p => p.ImageData).HasColumnType("image");
             b.Property(p => p.Discription).HasMaxLength(1000).IsRequired(true);
 

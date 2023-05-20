@@ -16,6 +16,8 @@ namespace AutoPartEnd.Domain
 
             b.Property(p => p.TypeId).IsRequired(true);
             b.HasOne(p => p.Types).WithMany(p => p.ManufactureYears).HasForeignKey(p => p.TypeId);
+            b.HasIndex(p => p.Year).IsUnique();
+
         }
 
     }

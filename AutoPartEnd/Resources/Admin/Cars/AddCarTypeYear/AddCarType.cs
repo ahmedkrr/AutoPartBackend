@@ -23,12 +23,12 @@ namespace AutoPartEnd.Resources.Admin
 
         }
 
-        [HttpPost("addCarType")]
+        [HttpPost("addCarType/{id}")]
 
-        public async Task<object> AddCarTypeReq([FromBody] AddCartype request)
+        public async Task<object> AddCarTypeReq([FromBody] AddCartype request ,[FromRoute] int id)
         {
 
-            var car = _dbContext.Set<CarModel>().FirstOrDefault(c => c.Id == request.Id);
+            var car = _dbContext.Set<CarModel>().FirstOrDefault(c => c.Id == id);
 
             if (car != null)
             {
@@ -36,13 +36,12 @@ namespace AutoPartEnd.Resources.Admin
                 _dbContext.Add(x);
                 await _dbContext.SaveChangesAsync();
 
-                _dbContext.Add(new ManufactureYear(request.CarYear, x.Id));
-                await _dbContext.SaveChangesAsync();
+             
 
-                return "sucess";
+                return Ok("Type Added Success");
             }
 
-            return "error there is no car model name like you entered ";
+            return BadRequest();
         }
     }
 }

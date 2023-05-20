@@ -56,26 +56,7 @@ namespace AutoPartEnd
 
             });
 
-            //For JWT
-            //services.AddAuthentication(options => {
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //   .AddJwtBearer(option =>
-            //   {
-            //       option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-            //       {
-            //           ValidateIssuer = true,
-            //           ValidateAudience = true,
-            //           RequireExpirationTime = true,
-            //           ValidIssuer = Configuration["JWT:Issuer"],
-            //           ValidAudience = Configuration["JWT:Audience"],
-            //           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"])
-            //           )
-
-            //       };
-            //   });
+          
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {

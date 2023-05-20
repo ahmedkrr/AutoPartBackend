@@ -19,19 +19,21 @@ namespace AutoPartEnd.Resources.Items
             _dbContext = dbContext;
         }
 
-        [HttpPut("UpdateItem")]
-        public async Task<object> UpdateItems([FromBody] UpdateItemsRequest Request)
+        [HttpPut("UpdateItem/{id}")]
+        public async Task<object> UpdateItems([FromForm] UpdateItemsRequest Request ,[FromRoute] int id)
         {
-            var Items = _dbContext.Set<Item>()
-                .Find(Request.Id); 
+            var item = await _dbContext.Set<Item>()
+                .FirstOrDefaultAsync(c => c.Id == id);
 
-            Items.Update(Request.Name ,Request.Discription ,Request.Price);
+            if (item == null)
+                return NoContent();
 
-            var UpdatedItems = _dbContext.Set<Item>()
-               .Find(Request.Id);
+            item.Update(Request.Name ,Request.Discription ,Request.Price);
+
+          
 
             await _dbContext.SaveChangesAsync();
-            return "Successfullty" + UpdatedItems;
+            return Ok("Updated Success");
 
 
         }

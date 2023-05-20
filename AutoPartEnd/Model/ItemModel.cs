@@ -42,7 +42,6 @@ namespace AutoPartEnd.Model
  
     public class UpdateItemsRequest
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Discription { get; set; }
         public Double Price { get; set; }

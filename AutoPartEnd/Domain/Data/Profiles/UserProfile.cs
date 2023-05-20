@@ -48,10 +48,10 @@ namespace AutoPartEnd.Domain
             CreatDate = DateTime.UtcNow;
         }
         
-        public void UpdateUserAdmin(string name ,UserRole role ,bool isAdmin ,bool isDeactive)
+        public void UpdateUserAdmin(string name, string email  ,bool isAdmin ,bool isDeactive)
         {
+            Email = email;
             Name = name;
-            Role = role;
             IsAdmin = isAdmin;
             IsDeactive = isDeactive;
         }

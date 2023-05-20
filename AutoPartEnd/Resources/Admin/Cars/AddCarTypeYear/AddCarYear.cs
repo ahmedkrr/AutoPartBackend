@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace AutoPartEnd.Resources.Admin
 {
-    //here we can add the year for any car have name and type and dont have 
     [ApiController]
     [Route("api/admin")]
-    //[Authorize]
     public class AddCarYear : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
@@ -22,23 +20,20 @@ namespace AutoPartEnd.Resources.Admin
 
         }
 
-
-        [HttpPost("addcaryear")]
-        public async Task<object> AddCarYearReq([FromBody] AddCaryear request)
+        [HttpPost("addcaryear/{id}")]
+        public async Task<object> AddCarYearReq([FromBody] AddCaryear request ,[FromRoute] int id)
         {
+            var type = _dbContext.Set<CarType>().FirstOrDefault(c => c.Id == id);
 
-            var car = _dbContext.Set<CarModel>().FirstOrDefault(c => c.Id == request.CarId);
-            var type = _dbContext.Set<CarType>().FirstOrDefault(c => c.Id == request.TypeId);
-
-            if (car != null && type != null)
+            if (type != null)
             {
-                _dbContext.Add(new ManufactureYear(request.CarYear, request.TypeId));
+                _dbContext.Add(new ManufactureYear(request.CarYear, id));
                 await _dbContext.SaveChangesAsync();
-                return "sucess";
+                return Ok();
                 
             }
 
-            return "error there is no car model name or type like you entered ";
+            return BadRequest();
         }
     }
 }

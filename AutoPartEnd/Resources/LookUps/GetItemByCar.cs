@@ -32,7 +32,7 @@ namespace AutoPartEnd.Resources
                 .Include(c => c.SubCategory )
                 .ThenInclude(c => c.Category)
                 .Include(c => c.CompanyProfile)
-                .Where(s => s.CarModelId == carId && s.CarTypeId == typeId && s.ManufactureYearId == yearId && s.SubCategoryId == subcategoryId)
+                .Where(s => (s.CarModelId == carId && s.CarTypeId == typeId && s.ManufactureYearId == yearId && s.SubCategoryId == subcategoryId)|| (s.SubCategoryId == subcategoryId && s.IsUniversalItem == true))
                 .Select(c => new GetItemResponsee
                 {
                     Id = c.Id,

@@ -17,17 +17,12 @@ namespace AutoPartEnd.Model
 
     public class AddCartype
     {
-        public int Id { get; set; }
         public string CarType { get; set; }
-        public DateTime CarYear { get; set; }
 
     }
     public class AddCaryear
     {
-        public int CarId { get; set; }
-        public int TypeId { get; set; }
         public DateTime CarYear { get; set; }
-
     }
     public class GetCarResponse
     {
@@ -59,18 +54,6 @@ namespace AutoPartEnd.Model
         public int YearId { get; set; }
 
     }
-    public class UpdateCarRequest
-    {
-        public int CarModelId { get; set; }
-        public string Name { get; set; }
-
-        public string TypeName { get; set; }
-
-        public string Year { get; set; }
-
-        public int TypeId { get; set; }
-
-        public int YearId { get; set; }
-    }
+    
    
 }

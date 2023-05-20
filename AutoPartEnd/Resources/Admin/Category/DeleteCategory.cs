@@ -1,6 +1,7 @@
 ﻿using AutoPartEnd.Domain;
 using AutoPartEnd.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,10 @@ namespace AutoPartEnd.Resources.Admin
         [HttpDelete("deletecategory/{id}")]
         public async Task<object> DeleteCategoryResponse([FromRoute] int Id)
         {
-            var category = await _dbContext.Set<Category>().FindAsync(Id);
+            var category = await _dbContext.Set<Category>()
+                .Include(c => c.SubCategories)
+                .FirstOrDefaultAsync(c => c.Id == Id);
+                
 
             if (category != null)
             {

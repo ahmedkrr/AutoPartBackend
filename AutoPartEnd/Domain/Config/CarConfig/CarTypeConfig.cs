@@ -16,7 +16,9 @@ namespace AutoPartEnd.Domain
 
             b.Property(p => p.ModelId).IsRequired(true);
             b.HasOne(p => p.Model).WithMany(p => p.CarTypes).HasForeignKey(p => p.ModelId);
-      
+
+            //b.HasIndex(p => p.Name).IsUnique();
+
         }
     }
 }

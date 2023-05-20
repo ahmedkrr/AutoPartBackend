@@ -72,10 +72,11 @@ namespace AutoPartEnd.Model
     }
     public class UpdatUserReq
     {
-        public string Name { get; private set; }
-        public UserRole Role { get; private set; }
-        public bool IsAdmin { get; private set; }
-        public bool IsDeactive { get; private set; }
+        public string Name { get;  set; }
+        public string Email { get; set; }
+        //public UserRole Role { get;  set; }
+        public bool IsAdmin { get;  set; }
+        public bool IsDeactive { get;  set; }
 
 
     }

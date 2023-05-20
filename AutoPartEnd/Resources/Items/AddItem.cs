@@ -43,13 +43,18 @@ namespace AutoPartEnd.Resources.Items
 
             try
             {
-
+                bool isUniversal = false;
+                if(request.CarModelId ==null && request.CartTypeId ==null && request.YearId == null)
+                {
+                    isUniversal = true;
+                }
                 using (var stream = new MemoryStream())
                 {
                     await request.File.CopyToAsync(stream);
                     var fileBytes = stream.ToArray();
                     string base64String = Convert.ToBase64String(fileBytes);
-                    var item = new Item(request.ItemName, request.Discription, request.Price, int.Parse(CompanyId), int.Parse(UserId), request.CarModelId, request.CartTypeId, request.YearId, request.SubCategoryId, DateTime.UtcNow, base64String);
+
+                    var item = new Item(request.ItemName, request.Discription, request.Price, int.Parse(CompanyId), int.Parse(UserId), request.CarModelId, request.CartTypeId, request.YearId, request.SubCategoryId, DateTime.UtcNow, base64String , isUniversal);
                     _dbContext.Add(item);
                     await _dbContext.SaveChangesAsync();
 

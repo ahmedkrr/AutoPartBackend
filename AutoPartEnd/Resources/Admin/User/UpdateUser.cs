@@ -21,16 +21,16 @@ namespace AutoPartEnd.Resources
         [HttpPut("UpdateUser/{Id}")]
         public async Task<object> UpdateUserRequest([FromBody] UpdatUserReq Request, [FromRoute] int Id)
         {
-            var user = _dbContext.Set<UserProfile>()
-                .Find(Id);
+            var user = await _dbContext.Set<UserProfile>()
+                .FindAsync(Id);
 
-            user.UpdateUserAdmin(Request.Name, Request.Role, Request.IsAdmin ,Request.IsDeactive);
+            user.UpdateUserAdmin(Request.Name ,Request.Email ,Request.IsAdmin, Request.IsDeactive);
 
             var UpdatedItems = _dbContext.Set<Item>()
                .Find(Id);
 
             await _dbContext.SaveChangesAsync();
-            return "Successfullty" + UpdatedItems;
+            return Ok();
 
 
         }

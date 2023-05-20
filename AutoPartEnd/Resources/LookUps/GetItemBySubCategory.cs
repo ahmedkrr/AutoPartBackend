@@ -33,7 +33,8 @@ namespace AutoPartEnd.Resources.LookUps
                 .Include(c => c.SubCategory)
                 .ThenInclude(c => c.Category)
                 .Include(c => c.CompanyProfile)
-                .Where(s => s.SubCategoryId == id)
+                               .Where(s => ( s.SubCategoryId == id) || (s.SubCategoryId == id && s.IsUniversalItem == true))
+
                 .Select(c => new GetItemResponsee
                 {
                     Id = c.Id,

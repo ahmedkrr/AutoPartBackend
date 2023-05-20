@@ -13,6 +13,8 @@ namespace AutoPartEnd.Domain
         public double Price { get; private set; }
         public string ImageData { get; set; }
 
+        public bool IsUniversalItem { get; set; }
+
         public DateTime CreatedTime { get; private set; }
         public DateTime? ModifiedAt { get; set; }
         public int? ModifiedBy { get; set; }
@@ -36,7 +38,7 @@ namespace AutoPartEnd.Domain
         public int SubCategoryId { get; private set; }
 
         public Item() { }
-        public Item(string name ,string discription ,double price, int companyProfileId, int userProfileId, int? carModelId, int? carTypeId, int? manufactureYearId, int subCategoryId ,DateTime createdTime ,string imageData)
+        public Item(string name ,string discription ,double price, int companyProfileId, int userProfileId, int? carModelId, int? carTypeId, int? manufactureYearId, int subCategoryId ,DateTime createdTime ,string imageData ,bool isUniversal)
         {
             Name = name;
             Discription = discription;
@@ -49,6 +51,7 @@ namespace AutoPartEnd.Domain
             SubCategoryId = subCategoryId;
             CreatedTime = createdTime;
             ImageData = imageData;
+            IsUniversalItem = isUniversal;
         }
 
 

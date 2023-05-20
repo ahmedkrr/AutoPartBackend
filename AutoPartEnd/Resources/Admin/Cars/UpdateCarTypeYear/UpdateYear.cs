@@ -10,25 +10,25 @@ namespace AutoPartEnd.Resources.Admin
 {
     [ApiController]
     [Route("api/admin")]
-    public class UpdateCarType : ControllerBase
+    public class UpdateYear : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public UpdateCarType(ApplicationDbContext dbContext)
+        public UpdateYear(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
 
         }
-        [HttpPut("UpdateCarType/{id}/{name}")]
-        public async Task<object> UpdateCarInfo([FromRoute] int id, string name)
+        [HttpPut("UpdateCarYear/{id}")]
+        public async Task<object> UpdateCarInfo([FromRoute] int id,[FromBody] DateTime date)
         {
 
-            var Type = await _dbContext.Set<CarType>().FirstOrDefaultAsync(c => c.Id == id);
+            var Year = await _dbContext.Set<ManufactureYear>().FirstOrDefaultAsync(c => c.Id == id);
 
-            if (Type == null)
+            if (Year == null)
                 return NoContent();
 
-            Type.update(name);
+            Year.update(date);
 
             await _dbContext.SaveChangesAsync();
 

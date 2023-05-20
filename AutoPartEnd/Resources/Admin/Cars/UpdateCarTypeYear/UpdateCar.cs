@@ -21,22 +21,21 @@ namespace AutoPartEnd.Resources.Admin.Cars.UpdateCarTypeYear
             _dbContext = dbContext;
 
         }
-        [HttpPost]
-        public async Task<object> UpdateCarInfo([FromBody] UpdateCarRequest request)
+        [HttpPut("UpdateCarName/{id}/{name}")]
+        public async Task<object> UpdateCarInfo([FromRoute] int id ,string name)
         {
-            var Car = await _dbContext.Set<CarModel>().FirstOrDefaultAsync();
+
+            var Car = await _dbContext.Set<CarModel>().FirstOrDefaultAsync(c => c.Id == id);
+
             if (Car == null)
-            {
-                return "There is no car ";
-            }
-            Car.update(request.Name);
+                return NoContent();
 
-              await  _dbContext.SaveChangesAsync();
+            Car.update(name);
 
-            
+           await  _dbContext.SaveChangesAsync();
 
 
-            return null;
+            return Ok();
 
 
         }
