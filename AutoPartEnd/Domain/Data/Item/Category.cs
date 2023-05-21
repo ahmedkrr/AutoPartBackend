@@ -16,6 +16,14 @@ namespace AutoPartEnd.Domain
         {
             CategoryName = categoryName;
         }
-
+        public void UpdateCatgory(string name)
+        {
+            CategoryName = name;
+        }
+        public void UpdateCatgory(string name , string imageData)
+        {
+            CategoryName = name;
+            ImageData = imageData;
+        }
     }
 }

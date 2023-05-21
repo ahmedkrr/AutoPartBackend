@@ -69,7 +69,7 @@ namespace AutoPartEnd.Resources.Account
         {
             var requestReset = await _dbContext.Set<ResetPassword>().FirstOrDefaultAsync(c => c.Guid == guid.ToString());
             if (requestReset == null || requestReset.RequestTime.AddMinutes(20) < DateTime.UtcNow)
-                return BadRequest("Invalid or expired GUID");
+                return BadRequest("Expired Url");
 
             try
             {

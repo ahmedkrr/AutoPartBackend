@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,12 @@ namespace AutoPartEnd.Model
     public class AddSubCategories
     {
         public string SubCategoryName { get; set; }
+    }
+    public class UpdateCategoryRequest
+    {
+        public string CategoryName { get; set; }
+        public IFormFile file { get; set; }
+
     }
 
     public class SubCategoriesResponse

@@ -20,5 +20,14 @@ namespace AutoPartEnd.Domain
             CategoryId = categoryId;
             ImageData = imageData;
         }
+        public void UpdateSubCatgory(string name)
+        {
+            SubCategoryName = name;
+        }
+        public void UpdateSubCatgory(string name, string imageData)
+        {
+            SubCategoryName = name;
+            ImageData = imageData;
+        }
     }
 }
