@@ -37,7 +37,7 @@ namespace AutoPartEnd
    
 
 
-            //For Allow Host
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -49,10 +49,11 @@ namespace AutoPartEnd
                                   });
             });
 
-            //For Database
+            
             services.AddDbContext<ApplicationDbContext>(option =>
             {
                 option.UseSqlServer(Configuration.GetConnectionString("AutoPart"));
+                
 
             });
 
@@ -75,7 +76,7 @@ namespace AutoPartEnd
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AutoPartEnd", Version = "v1" });
             });
-         
+        
 
         }
 

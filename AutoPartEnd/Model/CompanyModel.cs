@@ -36,4 +36,8 @@ namespace AutoPartEnd.Model
 
 
     }
+    public class AddmanagerReq
+    {
+        public string Email { get; set; }
+    }
 }

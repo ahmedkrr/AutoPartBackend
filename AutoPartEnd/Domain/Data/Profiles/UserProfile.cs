@@ -80,6 +80,7 @@ namespace AutoPartEnd.Domain
         {
             Password = password;
         }
+    
     }
 
     

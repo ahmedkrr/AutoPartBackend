@@ -33,8 +33,15 @@ namespace AutoPartEnd.Resources
 
 
                 if(items != null)
-                _dbContext.Remove(items);
-                _dbContext.Set<CompanyProfile>().Remove(user.CompanyProfile);
+                    _dbContext.Remove(items);
+
+
+                if (user.CompanyProfile != null)
+                    _dbContext.Set<CompanyProfile>().Remove(user.CompanyProfile);
+
+
+
+
                 _dbContext.Remove(user);
 
 

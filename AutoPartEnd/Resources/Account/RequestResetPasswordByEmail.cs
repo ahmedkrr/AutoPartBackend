@@ -34,12 +34,14 @@ namespace AutoPartEnd.Resources.Account
 
             var user = await _dbContext.Set<UserProfile>().FirstOrDefaultAsync(c => c.Email == model.To);
 
-            if (user != null)
+            if (user == null)
             {
-                var request = new ResetPassword(guid.ToString(), user.Id);
-                _dbContext.Add(request);
-                await _dbContext.SaveChangesAsync();
+                return BadRequest("The Email Not Found");
             }
+
+            var request = new ResetPassword(guid.ToString(), user.Id);
+            _dbContext.Add(request);
+            await _dbContext.SaveChangesAsync();
 
             using (var client = new SmtpClient("smtp.gmail.com", 587))
             {
